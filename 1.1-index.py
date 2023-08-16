@@ -62,5 +62,6 @@ if os.access(ys, os.F_OK):
                 break
             except:
                 print("启动失败")
+        time.sleep(0)
 else:
     win32api.MessageBox(0,"你没有安装原神？禁止启动！")
