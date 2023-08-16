@@ -7,13 +7,11 @@ import pygame
 import time
 
 def isScreenAllWhite(image):  # 判断屏幕全白
-    # 将截图转换为numpy数组，以便分析每个像素的颜色
     pixel_data = np.array(image)
-    # 计算所有白色像素的数量，检查每个像素是否为白色
     white_pixel_count = np.sum(np.all(pixel_data == [255, 255, 255], axis=-1))
-    total_pixels = pixel_data.shape[0] * pixel_data.shape[1]  # 计算总像素数量
-    white_ratio = white_pixel_count / total_pixels  # 计算白色像素的比例
-    return white_ratio > 0.9     # 如果白色占比超过90%，则判断为成功
+    total_pixels = pixel_data.shape[0] * pixel_data.shape[1]  
+    white_ratio = white_pixel_count / total_pixels  
+    return white_ratio > 0.9     # 如果白色占比超过90%，则判断为成功(可根据需要修改)
 
 
 
@@ -27,20 +25,18 @@ def programStart(program):  # 启动指定路径的程序
 
 def windowTop():  # 置顶原神窗口
     window_title = "原神"
-
     while True:
         try:
             hwnd = win32gui.FindWindow(None, window_title)
             if hwnd:
                 win32gui.SetForegroundWindow(hwnd)
-                print("启动成功！")
                 break
         except:
             ...
 
 
 
-def musicStart(audio_file, start_position):  # 播放音频
+def musicStart(audio_file, start_position):  # 启动小曲
     pygame.init()
 
     pygame.mixer.init()
@@ -53,7 +49,7 @@ def musicStart(audio_file, start_position):  # 播放音频
 
 
 ys = "D:\Genshin Impact\launcher.exe" # 原神安装路径
-music = "Shed a Light (Like Instrumental Mix).mp3"
+music = "Shed a Light (Like Instrumental Mix).mp3" # 小曲存放路径
 
 print("加载完成，等待原神启动...")
 while True:
@@ -61,9 +57,9 @@ while True:
     if isScreenAllWhite(screenshot):  # 检测全白
         try:
             print("原神？启动！")
-            programStart(ys)  # 启动原神
-            musicStart(music, 0)  # 启动小曲的线程
-            windowTop  # 原神窗口置顶的线程
+            programStart(ys)  
+            musicStart(music, 0)
+            windowTop 
             break
         except:
             print("启动失败")
