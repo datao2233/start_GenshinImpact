@@ -26,7 +26,7 @@ def isScreenAllWhite(image):  # 判断屏幕全白
     white_pixel_count = np.sum(np.all(pixel_data == [255, 255, 255], axis=-1))
     total_pixels = pixel_data.shape[0] * pixel_data.shape[1]  # 计算总像素数量
     white_ratio = white_pixel_count / total_pixels  # 计算白色像素的比例
-    return white_ratio > 0.8     # 如果白色占比超过80%，则判断为成功
+    return white_ratio > 0.8     # 在这里设置灵敏度，默认为白色占80%时启动原神 <---------------- 在这里修改灵敏度
 
 def programStart(program):  # 启动指定路径的程序
     try:
@@ -71,6 +71,6 @@ if os.access(ys, os.F_OK):
                 break
             except:
                 messagebox.showerror("一定是玩原神玩的！", "启动失败")
-        time.sleep(0)
+        time.sleep(0) # <-------------------------------- 在这里修改检测间隔(单位秒)
 else:
     messagebox.showerror("你没有安装原神？","启动不了~怎么想都启动不了吧！")
