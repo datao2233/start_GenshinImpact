@@ -5,7 +5,8 @@ import win32gui
 import pygame
 import time
 import os
-from tkinter import messagebox #弹窗
+from tkinter import messagebox # 弹窗
+import psutil # 检测是否已经启动
 
 # VSCode 对 pywin32 给出虚假警告，忽略
 # 对路径使用`r`以防止以外的 SyntaxWarning
@@ -14,8 +15,9 @@ from tkinter import messagebox #弹窗
 os.chdir(os.path.dirname(os.path.abspath(__file__)))  # 避免意外的位置
 
 # -----------相关变量设置---------------
-ys = r"D:\path\to\Genshin Impact\Genshin Impact Game\YuanShen.exe" # 原神安装路径
+ys = r"D:\鸭子家园\应用程序\Genshin Impact\Genshin Impact Game\YuanShen.exe" # 原神安装路径
 music = r"Shed a Light (Like Instrumental Mix).mp3" # 启动音乐
+program_name = "YuanShen.exe" # 不用动，除非你启动的是启动器而非游戏本体
 # -------------------------------------
 
 
@@ -57,20 +59,29 @@ def musicStart(audio_file, start_position):
         pygame.time.Clock().tick(10)
     pygame.quit()
 
+def is_program_running(program_name):# 检测是否已经启动
+    for proc in psutil.process_iter(['name']):
+        if proc.info['name'] == program_name:
+            return True
+    return False
+
 if os.access(ys, os.F_OK):
     os.system("cls")# 清除来自pygame的消息
     print("程序加载完成，等待原神启动...")
     while True:
         screenshot = ImageGrab.grab()
         if isScreenAllWhite(screenshot):  # 检测全白
-            try:
-                programStart(ys)  # 启动原神
-                musicStart(music, 0)  # 启动小曲
-                windowTop
-                print("原神？启动！")
-                break
-            except:
-                messagebox.showerror("一定是玩原神玩的！", "启动失败")
+            if not is_program_running(program_name):
+                try:
+                    programStart(ys)  # 启动原神
+                    musicStart(music, 0)  # 启动小曲
+                    windowTop
+                    print("原神？启动！")
+                    break
+                except:
+                    messagebox.showerror("一定是玩原神玩的！", "启动失败")
+            else:
+                print("启动太多了，要装不下了~")
         time.sleep(0) # <-------------------------------- 在这里修改检测间隔(单位秒)
 else:
     messagebox.showerror("你没有安装原神？","启动不了~怎么想都启动不了吧！")
