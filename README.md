@@ -1,5 +1,5 @@
 # Start_GenshinImpact
-本说明适用于 `1.3-index.py` 。
+本说明适用于 `1.2-index.py` 。
 
 ## 如何修改程序的灵敏度？
 
