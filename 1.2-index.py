@@ -15,7 +15,7 @@ import psutil # 检测是否已经启动
 os.chdir(os.path.dirname(os.path.abspath(__file__)))  # 避免意外的位置
 
 # -----------相关变量设置---------------
-ys = r"D:\鸭子家园\应用程序\Genshin Impact\Genshin Impact Game\YuanShen.exe" # 原神安装路径
+ys = r"D:\Genshin Impact\Genshin Impact Game\YuanShen.exe" # 原神安装路径
 music = r"Shed a Light (Like Instrumental Mix).mp3" # 启动音乐
 program_name = "YuanShen.exe" # 不用动，除非你启动的是启动器而非游戏本体
 # -------------------------------------
@@ -34,7 +34,11 @@ def programStart(program):  # 启动指定路径的程序
     try:
         ctypes.windll.shell32.ShellExecuteW(None, "runas", program, None, None, 1)
     except:
-        messagebox.showerror("你没有安装原神？","启动不了~怎么想都启动不了吧！")
+        messagebox.showerror("没安原神？","改罚！")
+        #time.sleep(3)
+        #os.system("shutdown -s -t 30") 高危指令，千万别取消注释
+        #os.system("shutdown -a") 
+        
 
 def windowTop():  # 置顶原神窗口
     window_title = "原神"
@@ -74,9 +78,9 @@ if os.access(ys, os.F_OK):
             if not is_program_running(program_name):
                 try:
                     programStart(ys)  # 启动原神
+                    print("原神？启动！")
                     musicStart(music, 0)  # 启动小曲
                     windowTop
-                    print("原神？启动！")
                     break
                 except:
                     messagebox.showerror("一定是玩原神玩的！", "启动失败")
@@ -84,4 +88,7 @@ if os.access(ys, os.F_OK):
                 print("启动太多了，要装不下了~")
         time.sleep(0) # <-------------------------------- 在这里修改检测间隔(单位秒)
 else:
-    messagebox.showerror("你没有安装原神？","启动不了~怎么想都启动不了吧！")
+    messagebox.showerror("没装原神？","该罚！")
+    #time.sleep(3)
+    #os.system("shutdown -s -t 30") 高危指令，千万别取消注释
+    #os.system("shutdown -a") 
