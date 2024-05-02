@@ -16,7 +16,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))  # 避免意外的位置
 
 # -----------相关变量设置---------------
 ys = r"D:\Genshin Impact\Genshin Impact Game\YuanShen.exe" # 原神安装路径
-music = r"Shed a Light (Like Instrumental Mix).mp3" # 启动音乐
+music = r"startmusic.mp3" # 启动音乐
 program_name = "YuanShen.exe" # 不用动，除非你启动的是启动器而非游戏本体
 # -------------------------------------
 
