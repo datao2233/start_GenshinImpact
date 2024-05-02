@@ -11,6 +11,8 @@ from tkinter import messagebox #弹窗
 # 对路径使用`r`以防止以外的 SyntaxWarning
 # 本地测试 pass
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))  # 避免意外的位置
+
 # -----------相关变量设置---------------
 ys = r"D:\path\to\Genshin Impact\Genshin Impact Game\YuanShen.exe" # 原神安装路径
 music = r"Shed a Light (Like Instrumental Mix).mp3" # 启动音乐
